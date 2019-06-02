@@ -1,0 +1,7 @@
+@media all and (min-width: 1200px) {
+    .AppcontainerHeader{
+        width: 100%;
+        color: white;
+        text-align: center;
+    }
+}

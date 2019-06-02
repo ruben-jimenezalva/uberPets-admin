@@ -1,0 +1,21 @@
+.banner{
+    position: fixed;
+    left: 0;
+    top: 10%;
+    height: 200px;
+    width: 100%;
+    background-color: rgb(33, 196, 0);
+}
+
+.containerBanner{
+    font-family: "Open Sans", sans-serif;
+    color: #ffffff;
+    text-align: center;
+    position: relative;
+    top: 3em;
+}
+
+.logo-font{
+    font-size: 5em;
+    font-weight: 600;
+}

@@ -1,0 +1,19 @@
+@media all and (min-width: 1200px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 420px;
+  }
+
+  .Login h1{
+    margin: 0 auto;
+    max-width: 420px;
+    color:rgb(106, 129, 179);
+    position: relative;
+    top: -1em;
+    left: 3em;
+  }
+}
