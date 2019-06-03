@@ -1,0 +1,24 @@
+@media all and (min-width: 1200px) {
+    .driverBar{
+        position: relative;
+        left: 0;
+        top: -20px;    
+        height: 70px;
+        width: 100%;
+        background-color: rgb(58, 236, 4);
+        color:rgb(252, 252, 252);
+        text-align: center;
+    }
+
+    .titleDriverBar{
+        position: relative;
+        top:15px;    
+    }
+    
+    .DriverView{
+        position: relative;
+        top:0px;    
+        word-wrap: break-word;
+        height: 100%;
+    }
+}
