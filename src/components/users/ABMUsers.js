@@ -10,6 +10,7 @@ export default class ABMUser extends React.Component {
         super(props);
         this.state = { 
             row: "",
+            dataFilters:""
         }
     }
 

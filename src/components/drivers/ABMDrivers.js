@@ -10,6 +10,7 @@ export default class ABMDriver extends React.Component {
         super(props);
         this.state = { 
             row: "",
+            dataFilters:""
         }
     }
 
@@ -17,34 +18,15 @@ export default class ABMDriver extends React.Component {
         this.setState({row:row});
     }
 
-    /*updateDriver(data) {
-        var config = {
-            headers: { 'Authorization': Auth.getToken() }
-        };
-
-        let currentComponent = this;
-        var link = ApiLinks.Drivers + "/" + data.id;
-
-        Axios
-            .put(link, data, config)
-            .then(function (response) {
-                currentComponent.setState({ driver: response.data });
-            })
-            .catch(function (error) {
-                currentComponent.setState({ responseError: true });
-                console.log(error);
-                alert("Error to update Driver");
-            });
-        this.setState({row:""});
-    }*/
+    applyFilters(data) {
+        this.setState({dataFilters:data});
+    }
 
     render() {
         return (
             <div>
-            <FiltersDriver></FiltersDriver>
-            <DriverTable
-                onCellEdit={this.onCellEdit.bind(this)}
-                {...this.state} />
+                <FiltersDriver applyFilters={this.applyFilters.bind(this)}></FiltersDriver>
+                <DriverTable {...this.state}/>
             </div>
       );
     }
