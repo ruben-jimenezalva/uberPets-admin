@@ -147,12 +147,11 @@ export default class FiltersTRavel extends React.Component {
 
                 <div class="columnTravel">            
                     <FormGroup
-                        controlId="status_payment"
-                        value={this.state.id_payments}
+                        controlId="status"
                         onChange={this.onChangeStatus}
                         type="text" >
                         <ControlLabel id={this.state.value}>Estado</ControlLabel>{' '}
-                        <FormControl componentClass="select" value={this.state.status_payment}>
+                        <FormControl componentClass="select">
                             <option value="">{"seleccione"}</option>
                             <option value={statusOnTravel}>{statusOnTravel}</option>
                             <option value={statusFinish}>{statusFinish}</option>

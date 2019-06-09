@@ -21,15 +21,50 @@ export default class UserTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        this.setState({responseError: false});
-        this.componentWillMount();    
+        this.componentWillMount(nextProps.dataFilters);    
     }
 
-    componentWillMount() {
+    componentWillMount(data) {
+        
+        var path =ApiLinks.Users;
+        if (data != undefined ||  data != null){
+            let name = data.name ==""? "":"name="+data.name;
+            let status = data.status ==""? "":"status="+data.status;
+            let minScore = data.minScore ==""? "":"minScore="+data.minScore;
+            let maxScore = data.maxScore ==""? "":"maxScore="+data.maxScore;
+
+            if(name != "" || status != "" || minScore != "" || maxScore != "" ){
+                path = path+"/?";
+                let originalPath = path;
+
+                if(name != "" )
+                    path = path + name;
+    
+                if(status != "" && originalPath != path)
+                    path = path+"&"+status;
+                else if (status!= "")
+                    path = path + status;
+    
+                if(minScore != "" && originalPath != path)
+                    path = path+"&"+minScore;
+                else if (minScore!= "")
+                    path = path + minScore;
+    
+                if(maxScore != "" && originalPath != path)
+                    path = path+"&"+maxScore;
+                else if (maxScore!= "")
+                    path = path + maxScore;
+            }
+
+            alert(path);
+
+        }
+
         this.setState({responseError: false});
         var config = {
             headers: { 'Authorization':Auth.getToken() }
         };
+
 
         let currentComponent = this;
 

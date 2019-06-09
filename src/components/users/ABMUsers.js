@@ -17,34 +17,15 @@ export default class ABMUser extends React.Component {
         this.setState({row:row});
     }
 
-    /*updateUser(data) {
-        var config = {
-            headers: { 'Authorization': Auth.getToken() }
-        };
-
-        let currentComponent = this;
-        var link = ApiLinks.Users + "/" + data.id;
-
-        Axios
-            .put(link, data, config)
-            .then(function (response) {
-                currentComponent.setState({ user: response.data });
-            })
-            .catch(function (error) {
-                currentComponent.setState({ responseError: true });
-                console.log(error);
-                alert("Error to update User");
-            });
-        this.setState({row:""});
-    }*/
+    applyFilters(data) {
+        this.setState({dataFilters:data});
+    }
 
     render() {
         return (
             <div>
-            <FiltersUser></FiltersUser>
-            <UserTable
-                onCellEdit={this.onCellEdit.bind(this)}
-                {...this.state} />
+                <FiltersUser applyFilters={this.applyFilters.bind(this)}>></FiltersUser>
+                <UserTable {...this.state} />
             </div>
       );
     }

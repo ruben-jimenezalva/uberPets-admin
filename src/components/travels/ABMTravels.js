@@ -19,29 +19,7 @@ export default class ABMTravel extends React.Component {
         this.setState({row:row});
     }
 
-    /*updateTravel(data) {
-        var config = {
-            headers: { 'Authorization': Auth.getToken() }
-        };
-
-        let currentComponent = this;
-        var link = ApiLinks.Travels + "/" + data.id;
-
-        Axios
-            .put(link, data, config)
-            .then(function (response) {
-                currentComponent.setState({ travel: response.data });
-            })
-            .catch(function (error) {
-                currentComponent.setState({ responseError: true });
-                console.log(error);
-                alert("Error to update Travel");
-            });
-        this.setState({row:""});
-    }*/
-
     applyFilters(data) {
-        //showResults(data);
         this.setState({dataFilters:data});
     }
 
@@ -49,8 +27,7 @@ export default class ABMTravel extends React.Component {
         return (
             <div>
                 <FiltersTravel applyFilters={this.applyFilters.bind(this)}></FiltersTravel>
-                <TravelTable
-                    {...this.state} />
+                <TravelTable {...this.state} />
             </div>
       );
     }

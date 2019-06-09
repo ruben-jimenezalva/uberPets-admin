@@ -4,6 +4,12 @@ import { Button, Form, FormGroup, ControlLabel, FormControl, InputGroup } from "
 
 import "./FiltersUser.css";
 
+const statusAvailable = "disponible";
+const statusDisabled = "deshabilitado";
+const statusEnabled = "habilitado";
+const statusOffline= "desconectado";
+
+
 export default class FiltersUser extends React.Component {
     constructor(props) {
         super(props);
@@ -39,6 +45,17 @@ export default class FiltersUser extends React.Component {
         this.setState({maxScore:""});
     }
 
+    handleDone() {
+        this.props.applyFilters(
+            {
+                "name":this.state.name,
+                "status":this.state.status,
+                "minScore":this.state.minScore,
+                "maxScore":this.state.maxScore
+            }
+        );
+    }
+
     render() {
         return (
             <div class="row" className="rowFiltersUser">
@@ -54,12 +71,18 @@ export default class FiltersUser extends React.Component {
                 </div>
 
                 <div class="columnUser">            
-                    <FormGroup controlId="status" onChange={this.handleChange}>
+                    <FormGroup
+                        controlId="status"
+                        onChange={this.handleChange}
+                        type="text" >
                         <ControlLabel id={this.state.value}>Estado</ControlLabel>{' '}
-                        <InputGroup>
-                        <FormControl type="text" value={this.state.status}/>
-                        <InputGroup.Addon onClick={this.eraseStatus.bind(this)}>x</InputGroup.Addon>
-                        </InputGroup>
+                        <FormControl componentClass="select">
+                            <option value="">{"seleccione"}</option>
+                            <option value={statusAvailable}>{statusAvailable}</option>
+                            <option value={statusDisabled}>{statusDisabled}</option>
+                            <option value={statusEnabled}>{statusEnabled}</option>
+                            <option value={statusOffline}>{statusOffline}</option>
+                        </FormControl>
                     </FormGroup>
                 </div>
 
@@ -85,7 +108,7 @@ export default class FiltersUser extends React.Component {
 
                 <div class="columnUser">
                     <div className="buttonApply">
-                            <Button bsStyle="primary" block>Aplicar Filtros</Button>
+                        <Button bsStyle="primary" type="submit" block onClick={this.handleDone.bind(this)}>Aplicar Filtros</Button>                            
                     </div>
                 </div>
 
