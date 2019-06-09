@@ -10,8 +10,8 @@ import DriverDetails from '../components/drivers/DriverDetails';
 
 export default ()=>
   <Switch>
-    <Route path="/login" exact component={Login} />
-    <Route path="/" exact component={Home} />
+    <Route path="/" exact component={Login} />
+    <PrivateRoute path="/home" exact component={Home} />
     <PrivateRoute path="/travels" exact component={Travel} />
     <PrivateRoute path="/users" exact component={User} />
     <PrivateRoute path="/drivers" exact component={Driver} />

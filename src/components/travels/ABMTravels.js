@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 import ApiLinks from "../../utils/ApiLinks";
 import Auth from "../../utils/auth";
+import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
 import TravelTable from "./TravelTable";
 
 export default class ABMTravel extends React.Component {
@@ -40,9 +41,13 @@ export default class ABMTravel extends React.Component {
     render() {
         return (
             <div>
-            <TravelTable
-                onCellEdit={this.onCellEdit.bind(this)}
-                {...this.state} />
+                <InputGroup size="sm">
+                    <InputGroupAddon addonType="prepend">@lg</InputGroupAddon>
+                    <Input />
+                </InputGroup>
+                <TravelTable
+                    onCellEdit={this.onCellEdit.bind(this)}
+                    {...this.state} />
             </div>
       );
     }

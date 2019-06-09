@@ -5,7 +5,8 @@ import "./Login.css";
 import Auth from "../../utils/auth";
 var ApiLinks = require("../../utils/ApiLinks");
 
-var SignIn = "Iniciar Sesión";
+const SignIn = "Iniciar Sesión";
+const nameButtonLogin =  "Ingresar"
 
 export default class Login extends Component {
     constructor(props) {
@@ -53,7 +54,7 @@ export default class Login extends Component {
 
     redirectUser = () => {
         Auth.enableAuthentication();
-        this.props.history.push("/");
+        this.props.history.push("/home");
         //agregado
         window.location.reload(false); 
     };
@@ -83,7 +84,7 @@ export default class Login extends Component {
                         bsSize="large"
                         disabled={!this.validateForm()}
                         type="submit">
-                        Login
+                        {nameButtonLogin}
                     </Button>
                 </form>
             </div>

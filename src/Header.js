@@ -10,26 +10,11 @@ const travels = "Viajes";
 const drivers = "Choferes";
 const users = "Usuarios";
 
-const LoggedOutView = props => {
+/*const LoggedOutView = props => {
     if (!Auth.isAuthenticated()) {
-        return (
-            <ul className="nav navbar-nav navbar-right">
-                <li className="nav-item">
-                    <Link to="/" className="nav-link">
-                        Home
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link to="/login" className="nav-link">
-                        {SignIn}
-                    </Link>
-                </li>
-            </ul>
-        );
+        return null;
     }
-    return null;
-};
+};*/
 
 
 const handleLogout = async event => {
@@ -42,35 +27,34 @@ const LoggedInView = props => {
 
     if (Auth.isAuthenticated()) {
         return (
-            <ul className="nav navbar-nav navbar-right">
-                <li className="nav-item">
-                    <Link to="/" className="nav-link">
-                        Home
-                    </Link>
-                </li>
+            <div>
+                <Link to="/home" className="navbar-brand">
+                    {AppName}
+                </Link>
+                <ul className="nav navbar-nav navbar-right">
+                    <li className="nav-item">
+                        <Link to="/travels" className="nav-link">
+                            {travels}
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/drivers" className="nav-link">
+                            {drivers}
+                        </Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/users" className="nav-link">
+                            {users}
+                        </Link>
+                    </li>
 
-                <li className="nav-item">
-                    <Link to="/travels" className="nav-link">
-                        {travels}
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/drivers" className="nav-link">
-                        {drivers}
-                    </Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/users" className="nav-link">
-                        {users}
-                    </Link>
-                </li>
-
-                <li className="nav-item">
-                    <Link to="/" className="nav-link" onClick={handleLogout}>
-                        {SignOut}
-                    </Link>
-                </li>
-            </ul>
+                    <li className="nav-item">
+                        <Link to="/" className="nav-link" onClick={handleLogout}>
+                            {SignOut}
+                        </Link>
+                    </li>
+                </ul>
+            </div>
         );
     }
 
@@ -84,13 +68,7 @@ class Header extends React.Component {
 
                 <nav className="navbar navbar-light">
                     <div className="containerHeader">
-
-                        <Link to="/" className="navbar-brand">
-                            {AppName}
-                        </Link>
-                        <LoggedOutView />
                         <LoggedInView />
-
                     </div>
                 </nav>
             </div>
