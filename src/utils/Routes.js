@@ -6,6 +6,8 @@ import Login from '../components/login/Login';
 import Travel from '../components/travels/TravelApp';
 import User from '../components/users/UserApp';
 import Driver from '../components/drivers/DriverApp';
+import DriverDetails from '../components/drivers/DriverDetails';
+
 export default ()=>
   <Switch>
     <Route path="/login" exact component={Login} />
@@ -13,6 +15,7 @@ export default ()=>
     <PrivateRoute path="/travels" exact component={Travel} />
     <PrivateRoute path="/users" exact component={User} />
     <PrivateRoute path="/drivers" exact component={Driver} />
+    <PrivateRoute path='/drivers/:id' exact component={DriverDetails} />
   </Switch>;
 
 
