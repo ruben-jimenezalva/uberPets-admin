@@ -2,8 +2,9 @@ import React from "react";
 import Axios from "axios";
 import ApiLinks from "../../utils/ApiLinks";
 import Auth from "../../utils/auth";
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import TravelTable from "./TravelTable";
+import FiltersTravel from "./FiltersTravel";
 
 export default class ABMTravel extends React.Component {
     constructor(props) {
@@ -41,10 +42,7 @@ export default class ABMTravel extends React.Component {
     render() {
         return (
             <div>
-                <InputGroup size="sm">
-                    <InputGroupAddon addonType="prepend">@lg</InputGroupAddon>
-                    <Input />
-                </InputGroup>
+                <FiltersTravel></FiltersTravel>
                 <TravelTable
                     onCellEdit={this.onCellEdit.bind(this)}
                     {...this.state} />
