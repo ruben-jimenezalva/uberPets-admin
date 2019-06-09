@@ -21,11 +21,49 @@ export default class TravelTable extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        this.setState({responseError: false});
-        this.componentWillMount();    
+        this.componentWillMount(nextProps.dataFilters);    
     }
 
-    componentWillMount() {
+    componentWillMount(data) {
+
+        var path =ApiLinks.Travels;
+        if (data != undefined ||  data != null){
+            let startDate = data.dateFrom ==""? "":"startDate="+data.dateFrom;
+            let endDate = data.dateTo ==""? "":"endDate="+data.dateTo;
+            let status = data.status ==""? "":"status="+data.status;
+            let driverId = data.driverId ==""? "":"driverId="+data.driverId;
+            let userId = data.userId ==""? "":"userId="+data.userId;
+
+            if(startDate != "" || endDate != "" || status != "" || driverId != "" || userId != "" ){
+                path = path+"/?";
+                let originalPath = path;
+
+                if(startDate != "" )
+                    path = path + startDate;
+
+                if(endDate != "" && originalPath != path)
+                    path = path+"&"+endDate;
+                else if (endDate!= "")
+                    path = path + endDate;
+    
+                if(status != "" && originalPath != path)
+                    path = path+"&"+status;
+                else if (status!= "")
+                    path = path + status;
+    
+                if(driverId != "" && originalPath != path)
+                    path = path+"&"+driverId;
+                else if (driverId!= "")
+                    path = path + driverId;
+    
+                if(userId != "" && originalPath != path)
+                    path = path+"&"+userId;
+                else if (userId!= "")
+                    path = path + userId;
+            }
+
+        }
+
         this.setState({responseError: false});
         var config = {
             headers: { 'Authorization':Auth.getToken() }
@@ -34,7 +72,7 @@ export default class TravelTable extends React.Component {
         let currentComponent = this;
 
         Axios
-            .get(ApiLinks.Travels, config)
+            .get(path, config)
             .then(function (response) {
                 currentComponent.setState({travels: response.data});
                 console.log(response.data);
@@ -53,11 +91,6 @@ export default class TravelTable extends React.Component {
             </button>
         )
      }
-
-
-    onClickEditTravel(cell, row, rowIndex){
-        this.props.onCellEdit(row);
-    }
 
     indexNumber(cell, row, enumObject, rowIndex) { return (<div>{rowIndex + 1}</div>) }
 

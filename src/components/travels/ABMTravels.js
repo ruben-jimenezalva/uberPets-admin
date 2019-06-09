@@ -11,6 +11,7 @@ export default class ABMTravel extends React.Component {
         super(props);
         this.state = { 
             row: "",
+            dataFilters:""
         }
     }
 
@@ -39,12 +40,16 @@ export default class ABMTravel extends React.Component {
         this.setState({row:""});
     }*/
 
+    applyFilters(data) {
+        //showResults(data);
+        this.setState({dataFilters:data});
+    }
+
     render() {
         return (
             <div>
-                <FiltersTravel></FiltersTravel>
+                <FiltersTravel applyFilters={this.applyFilters.bind(this)}></FiltersTravel>
                 <TravelTable
-                    onCellEdit={this.onCellEdit.bind(this)}
                     {...this.state} />
             </div>
       );

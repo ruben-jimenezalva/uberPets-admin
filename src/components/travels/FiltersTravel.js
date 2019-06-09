@@ -15,8 +15,9 @@ export default class FiltersTRavel extends React.Component {
         this.state = {
             dateTo: "",
             dateFrom: "",
-            user: "",
-            driver: "",
+            status:"",
+            userId: "",
+            driverId: "",
             showCalendarFrom:false,
             showCalendarTo:false,
         }
@@ -50,12 +51,17 @@ export default class FiltersTRavel extends React.Component {
     
     onChangeDataDriver = event =>{
         event.preventDefault();
-        this.setState({driver:event.target.value});
+        this.setState({driverId:event.target.value});
     }
 
     onChangeDataUser = event =>{
         event.preventDefault();
-        this.setState({user:event.target.value});
+        this.setState({userId:event.target.value});
+    }
+
+    onChangeStatus= event =>{
+        event.preventDefault();
+        this.setState({status:event.target.value});
     }
 
     eraseDateTo(){
@@ -67,14 +73,24 @@ export default class FiltersTRavel extends React.Component {
     }
 
     eraseDataUser(){
-        this.setState({user:""});
+        this.setState({userId:""});
     }
 
     eraseDataDriver(){
-        this.setState({driver:""});
+        this.setState({driverId:""});
     }
 
-
+    handleDone() {
+        this.props.applyFilters(
+            {
+                "dateTo":this.state.dateTo,
+                "dateFrom":this.state.dateFrom,
+                "status":this.state.status,
+                "userId":this.state.userId,
+                "driverId":this.state.driverId
+            }
+        );
+    }
 
     render() {
         return (
@@ -133,7 +149,7 @@ export default class FiltersTRavel extends React.Component {
                     <FormGroup
                         controlId="status_payment"
                         value={this.state.id_payments}
-                        onChange={this.handleChange}
+                        onChange={this.onChangeStatus}
                         type="text" >
                         <ControlLabel id={this.state.value}>Estado</ControlLabel>{' '}
                         <FormControl componentClass="select" value={this.state.status_payment}>
@@ -149,7 +165,7 @@ export default class FiltersTRavel extends React.Component {
                     <FormGroup>
                         <ControlLabel id={this.state.value}>Chofer</ControlLabel>{' '}
                         <InputGroup>
-                        <FormControl type="text" value={this.state.driver} onChange={this.onChangeDataDriver}/>
+                        <FormControl type="text" value={this.state.driverId} onChange={this.onChangeDataDriver}/>
                         <InputGroup.Addon onClick={this.eraseDataDriver.bind(this)}>x</InputGroup.Addon>
                         </InputGroup>
                     </FormGroup>
@@ -159,7 +175,7 @@ export default class FiltersTRavel extends React.Component {
                     <FormGroup>
                         <ControlLabel id={this.state.value}>Usuario</ControlLabel>{' '}
                         <InputGroup>
-                        <FormControl type="text" value={this.state.user} onChange={this.onChangeDataUser}/>
+                        <FormControl type="text" value={this.state.userId} onChange={this.onChangeDataUser}/>
                         <InputGroup.Addon onClick={this.eraseDataUser.bind(this)}>x</InputGroup.Addon>
                         </InputGroup>
                     </FormGroup>
@@ -167,7 +183,7 @@ export default class FiltersTRavel extends React.Component {
 
                 <div class="columnTravel">
                     <div className="buttonApply">
-                            <Button bsStyle="primary" block>Aplicar Filtros</Button>
+                            <Button bsStyle="primary" type="submit" block onClick={this.handleDone.bind(this)}>Aplicar Filtros</Button>
                     </div>
                 </div>
 

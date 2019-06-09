@@ -39,8 +39,6 @@ export default class FiltersUser extends React.Component {
         this.setState({maxScore:""});
     }
 
-
-
     render() {
         return (
             <div class="row" className="rowFiltersUser">
