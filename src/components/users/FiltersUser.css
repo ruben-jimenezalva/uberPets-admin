@@ -1,11 +1,11 @@
 
-.rowFiltersTravel {
+.rowFiltersUser {
   padding-left: 5px;
 }
 
-.columnTravel {
+.columnUser {
     float:left;
-    width: 15%;
+    width: 18%;
     padding-bottom: 10px;
     margin: 10px;
   }

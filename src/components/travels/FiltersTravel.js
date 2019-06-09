@@ -78,9 +78,9 @@ export default class FiltersTRavel extends React.Component {
 
     render() {
         return (
-            <div class="row" className="rowFilters">
+            <div class="row" className="rowFiltersTravel">
 
-                <div class="column">
+                <div class="columnTravel">
                     <FormGroup>
                         <ControlLabel id={this.state.value}>Fecha Desde</ControlLabel>{' '}
                         <InputGroup>
@@ -104,7 +104,7 @@ export default class FiltersTRavel extends React.Component {
                     </div>
                 </div>
 
-                <div class="column">
+                <div class="columnTravel">
                     <FormGroup>
                         <ControlLabel id={this.state.value}>Fecha Hasta</ControlLabel>{' '}
                         <InputGroup>
@@ -129,7 +129,7 @@ export default class FiltersTRavel extends React.Component {
                 </div>
     
 
-                <div class="column">            
+                <div class="columnTravel">            
                     <FormGroup
                         controlId="status_payment"
                         value={this.state.id_payments}
@@ -145,7 +145,7 @@ export default class FiltersTRavel extends React.Component {
                     </FormGroup>
                 </div>
 
-                <div class="column">            
+                <div class="columnTravel">            
                     <FormGroup>
                         <ControlLabel id={this.state.value}>Chofer</ControlLabel>{' '}
                         <InputGroup>
@@ -155,7 +155,7 @@ export default class FiltersTRavel extends React.Component {
                     </FormGroup>
                 </div>
 
-                <div class="column">            
+                <div class="columnTravel">            
                     <FormGroup>
                         <ControlLabel id={this.state.value}>Usuario</ControlLabel>{' '}
                         <InputGroup>
@@ -165,7 +165,7 @@ export default class FiltersTRavel extends React.Component {
                     </FormGroup>
                 </div>
 
-                <div class="column">
+                <div class="columnTravel">
                     <div className="buttonApply">
                             <Button bsStyle="primary" block>Aplicar Filtros</Button>
                     </div>

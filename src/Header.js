@@ -23,6 +23,9 @@ const handleLogout = async event => {
     window.location.reload(false); 
 };
 
+const handleClick = async event => {
+    console.log("ASD");
+};
 const LoggedInView = props => {
 
     if (Auth.isAuthenticated()) {
@@ -32,7 +35,7 @@ const LoggedInView = props => {
                     {AppName}
                 </Link>
                 <ul className="nav navbar-nav navbar-right">
-                    <li className="nav-item">
+                    <li className="nav-item" onClick={handleClick} color={"#3342FF"}>
                         <Link to="/travels" className="nav-link">
                             {travels}
                         </Link>

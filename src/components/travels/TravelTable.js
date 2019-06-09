@@ -76,7 +76,7 @@ export default class TravelTable extends React.Component {
 
                 return (
                     <div>
-                    <BootstrapTable data={ ArrayTravel } remote={this.remote} pagination exportCSV
+                    <BootstrapTable data={ ArrayTravel } remote={this.remote} search pagination exportCSV
                         tableStyle={ { border: '#0000FF 2.5px solid' } }>
                         <TableHeaderColumn width={'35px'} dataField="any" dataFormat={this.indexNumber}>#</TableHeaderColumn>
                         <TableHeaderColumn isKey hiddenOnInsert={true} dataField='id'>Id de viaje</TableHeaderColumn>
