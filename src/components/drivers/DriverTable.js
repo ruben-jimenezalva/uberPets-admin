@@ -55,9 +55,6 @@ export default class DriverTable extends React.Component {
                 else if (maxScore!= "")
                     path = path + maxScore;
             }
-
-            alert(path);
-
         }
 
 
@@ -69,7 +66,7 @@ export default class DriverTable extends React.Component {
         let currentComponent = this;
 
         Axios
-            .get(ApiLinks.Drivers, config)
+            .get(path, config)
             .then(function (response) {
                 currentComponent.setState({drivers: response.data});
                 console.log(response.data);
