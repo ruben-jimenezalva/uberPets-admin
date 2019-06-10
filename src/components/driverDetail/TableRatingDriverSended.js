@@ -10,7 +10,7 @@ var ReactBsTable  = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
-export default class RatingDriverRecievedTable extends React.Component {
+export default class RatingDriverSendedTable extends React.Component {
     constructor(props) {
         super(props)
         this.state = { travels: "",
@@ -21,8 +21,8 @@ export default class RatingDriverRecievedTable extends React.Component {
 
     componentWillMount() {
 
-        let toId = "toId="+this.props.driverId;
-        var path =ApiLinks.DriverScores+"/?"+toId;
+        let toId = "fromId="+this.props.driverId;
+        var path =ApiLinks.UserScores+"/?"+toId;
 
         this.setState({responseError: false});
         var config = {
@@ -33,7 +33,7 @@ export default class RatingDriverRecievedTable extends React.Component {
         Axios
             .get(path, config)
             .then(function (response) {
-                currentComponent.setState({driverScores: response.data});
+                currentComponent.setState({userScores: response.data});
                 console.log(response.data);
             })
             .catch(function (error) {
@@ -50,15 +50,15 @@ export default class RatingDriverRecievedTable extends React.Component {
                 <Alert className="text-center" id="QuerySuccesfully" bsStyle="danger">
                     Your session has <strong>expired</strong> or the system is <strong>not available</strong> 
                 </Alert>)
-        }else if(this.state.driverScores){
-            var arrayDriverScores = this.state.driverScores;
+        }else if(this.state.userScores){
+            var arrayUserScores = this.state.userScores;
 
             return (
                 <div>
-                <BootstrapTable data={ arrayDriverScores } remote={this.remote} search pagination exportCSV
+                <BootstrapTable data={ arrayUserScores } remote={this.remote} search pagination exportCSV
                     tableStyle={ { border: '#0000FF 2.5px solid' } }>
                     <TableHeaderColumn width={'35px'} dataField="any" dataFormat={this.indexNumber}>#</TableHeaderColumn>
-                    <TableHeaderColumn dataField='fromId'>Id de usuario</TableHeaderColumn>
+                    <TableHeaderColumn dataField='toId'>Id de usuario</TableHeaderColumn>
                     <TableHeaderColumn dataField='createdAt'>Fecha</TableHeaderColumn>
                     <TableHeaderColumn dataField='comment' >Comentario</TableHeaderColumn>
                     <TableHeaderColumn dataField='value' >Puntaje</TableHeaderColumn>

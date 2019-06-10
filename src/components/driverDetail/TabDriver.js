@@ -1,6 +1,9 @@
 import React from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import TableTravelsDriver from "./TableTravelsDriver";
+import TableRatingDriverRecieved from "./TableRatingDriverReceived";
+import TableRatingDriverSended from "./TableRatingDriverSended";
+
 import "./TabDriver.css";
 
 class TabDriver extends React.Component {
@@ -17,10 +20,12 @@ class TabDriver extends React.Component {
                         <TableTravelsDriver driverId={this.props.driverId}></TableTravelsDriver>
                     </Tab>
                     <Tab eventKey={2} title="Puntuaciones recibidas">
-                        Tab 2 content
+                        <br/>
+                        <TableRatingDriverRecieved driverId={this.props.driverId}></TableRatingDriverRecieved>
                     </Tab>
                     <Tab eventKey={3} title="Puntuaciones enviadas">
-                        Tab 3 content
+                        <br/>
+                        <TableRatingDriverSended driverId={this.props.driverId}></TableRatingDriverSended>
                     </Tab>
                 </Tabs>
             </div>

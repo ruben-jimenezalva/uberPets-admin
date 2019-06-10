@@ -7,4 +7,6 @@ module.exports = {
      Drivers : url+'/api/drivers',
      Travels : url+'/api/travels',
      Documents: url+'/api/fileDocuments',
+     DriverScores: url+'/api/driverScores',
+     UserScores: url+'/api/userScores',
 };
