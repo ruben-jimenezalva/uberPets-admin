@@ -15,7 +15,7 @@ export default class FiltersDriver extends React.Component {
         super(props);
         this.state = {
             name: "",
-            patent: "",
+            plate: "",
             status: "",
             minScore: "",
             maxScore: "",
@@ -38,8 +38,8 @@ export default class FiltersDriver extends React.Component {
         this.setState({name:""});
     }
 
-    erasePatent(){
-        this.setState({patent:""});
+    erasePlate(){
+        this.setState({plate:""});
     }
 
     eraseStatus(){
@@ -59,7 +59,7 @@ export default class FiltersDriver extends React.Component {
             {
                 "name":this.state.name,
                 "status":this.state.status,
-                "patent":this.state.patent,
+                "plate":this.state.plate,
                 "minScore":this.state.minScore,
                 "maxScore":this.state.maxScore
             }
@@ -82,11 +82,11 @@ export default class FiltersDriver extends React.Component {
                 </div>
 
                 <div class="columnDriver">            
-                    <FormGroup controlId="patent" onChange={this.handleChange}>
+                    <FormGroup controlId="plate" onChange={this.handleChange}>
                         <ControlLabel id={this.state.value}>Patente</ControlLabel>{' '}
                         <InputGroup>
-                        <FormControl type="text" value={this.state.patent}/>
-                        <InputGroup.Addon onClick={this.erasePatent.bind(this)}>x</InputGroup.Addon>
+                        <FormControl type="text" value={this.state.plate}/>
+                        <InputGroup.Addon onClick={this.erasePlate.bind(this)}>x</InputGroup.Addon>
                         </InputGroup>
                     </FormGroup>
                 </div>
