@@ -13,7 +13,7 @@ var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 export default class RatingDriverRecievedTable extends React.Component {
     constructor(props) {
         super(props)
-        this.state3 = { 
+        this.state = { 
             driverScores: "",
             responseError: false,
             responseSuccessfully: false,
@@ -46,19 +46,19 @@ export default class RatingDriverRecievedTable extends React.Component {
     indexNumber(cell, row, enumObject, rowIndex) { return (<div>{rowIndex + 1}</div>) }
 
     render() {
-        if (this.state3.responseError) {
+        if (this.state.responseError) {
             return(
                 <Alert className="text-center" id="QuerySuccesfully" bsStyle="danger">
                     Your session has <strong>expired</strong> or the system is <strong>not available</strong> 
                 </Alert>)
-        }else if(this.state3.driverScores){
-            var arrayDriverScores = this.state3.driverScores;
+        }else if(this.state.driverScores){
+            var arrayDriverScores = this.state.driverScores;
 
             return (
                 <div>
                 <BootstrapTable data={ arrayDriverScores } remote={this.remote} search pagination exportCSV
                     tableStyle={ { border: '#0000FF 2.5px solid' } }>
-                    <TableHeaderColumn width={'35px'} dataField="any" dataFormat={this.indexNumber}>#</TableHeaderColumn>
+                    <TableHeaderColumn isKey width={'35px'} dataField="any" dataFormat={this.indexNumber}>#</TableHeaderColumn>
                     <TableHeaderColumn dataField='fromId'>Id de usuario</TableHeaderColumn>
                     <TableHeaderColumn dataField='createdAt'>Fecha</TableHeaderColumn>
                     <TableHeaderColumn dataField='comment' >Comentario</TableHeaderColumn>
