@@ -165,8 +165,12 @@ class ProfileDriver extends React.Component {
                     <div className="buttons">
                         <Button bsSize="xsmall" href="javascript:history.go(-1)" className="buttonBack" bsStyle="primary" >volver</Button>
                         <br/><br/><br/><br/>
-                        <Button  bsSize="small" bsStyle="success" block>Ver ubicación</Button>   
-                        <br/>
+                        <Button bsSize="small" bsStyle="success" block >
+                            <a href='http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324' target="_blank"
+                                className="linkPhotos">
+                                Ver Ubicación
+                            </a>
+                        </Button>    
                         <Button bsSize="small" bsStyle="success" block >
                             <Link to={{ pathname:'/drivers/photos/'+this.props.driverId}} 
                                 className="linkPhotos">
