@@ -32,8 +32,9 @@ export default class DriverTable extends React.Component {
             let status = data.status ==""? "":"status="+data.status;
             let minScore = data.minScore ==""? "":"minScore="+data.minScore;
             let maxScore = data.maxScore ==""? "":"maxScore="+data.maxScore;
-
-            if(name != "" || status != "" || minScore != "" || maxScore != "" ){
+            let plate = data.plate ==""? "":"plate="+data.plate;
+            console.log(plate);
+            if(name != "" || status != "" || minScore != "" || maxScore != "" || plate != ""){
                 path = path+"/?";
                 let originalPath = path;
 
@@ -54,6 +55,12 @@ export default class DriverTable extends React.Component {
                     path = path+"&"+maxScore;
                 else if (maxScore!= "")
                     path = path + maxScore;
+
+                if(plate != "" && originalPath != path)
+                    console.log(path);
+                else if (plate!= "") 
+                    path = path + plate;
+                    
             }
         }
 
@@ -99,7 +106,18 @@ export default class DriverTable extends React.Component {
     showDocument(cell, row) {
         return row.party.dni;
     }
-    
+    showBrand(cell, row) {
+        return row.vehicle == null ? "" : row.vehicle.brand;
+    }
+    showModel(cell, row) {
+        return row.vehicle == null ? "" : row.vehicle.model;
+    }
+    showPlate(cell, row) {
+        return row.vehicle == null ? "" : row.vehicle.licensePlate;
+    }
+    showColor(cell, row) {
+        return row.vehicle == null ? "" : row.vehicle.color;
+    }
     linkedName = (cell, row) => {
         const cellAux = this.showName(cell, row);
         return (
@@ -125,6 +143,10 @@ export default class DriverTable extends React.Component {
                         <TableHeaderColumn isKey hiddenOnInsert={true} dataField='id'>Id de chofer</TableHeaderColumn>
                         <TableHeaderColumn dataField='name' dataFormat={this.linkedName}>Nombre</TableHeaderColumn>
                         <TableHeaderColumn dataField='dni' dataFormat={this.showDocument}>Documento</TableHeaderColumn>
+                        <TableHeaderColumn dataField='plate' dataFormat={this.showPlate}>Patente</TableHeaderColumn>
+                        <TableHeaderColumn dataField='brand' dataFormat={this.showBrand}>Marca</TableHeaderColumn>
+                        <TableHeaderColumn dataField='model' dataFormat={this.showModel}>Modelo</TableHeaderColumn>
+                        <TableHeaderColumn dataField='color' dataFormat={this.showColor}>Color</TableHeaderColumn>
                         <TableHeaderColumn dataField='status'>Estado</TableHeaderColumn>
                         <TableHeaderColumn dataField='travelAmount'>Cant. de viajes</TableHeaderColumn>
                         <TableHeaderColumn dataField='totalScore'>Puntaje</TableHeaderColumn>
