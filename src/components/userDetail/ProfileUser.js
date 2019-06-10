@@ -25,6 +25,7 @@ class ProfileUser extends React.Component {
             valueRating:3.5,
             name:"Agusto Linares",
             location:"",
+            status:"",
             styleButton:styleButtonAvailable,
             nameButton:nameButtonAvailable,
             imageProfile:imageProfileDefault,
@@ -97,6 +98,7 @@ class ProfileUser extends React.Component {
                 score = Number((score).toFixed(1));
                 currentComponent.setState({valueRating:score});
 
+                currentComponent.setState({status:data.status});
                 currentComponent.setState({name:data.party.name});
                 currentComponent.setState({phone:data.party.phone});
                 currentComponent.setState({dni:data.party.dni});
@@ -126,10 +128,6 @@ class ProfileUser extends React.Component {
                         <br/>
                         <h3>{this.state.name}</h3>
                         <br/>
-                        <br/>
-                        <Button bsStyle={this.state.styleButton} onClick={this.handleButtonDisable.bind(this)} block>
-                            {this.state.nameButton}
-                        </Button>
                     </div>         
                 </div>
 

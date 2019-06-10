@@ -14,6 +14,7 @@ const styleButtonDisable = "danger";
 const nameButtonAvailable = "habilitar";
 const nameButtonDisable = "deshabilitar";
 const statusDesabled = "deshabilitado";
+const statusEnable = "habilitado";
 const maxStars = 5;
 //const urlLocation = 'http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324'
 const urlLocation = 'http://www.google.com/maps/search/?api=1&query=';
@@ -28,6 +29,7 @@ class ProfileDriver extends React.Component {
             phone:"11356-7890",
             dni:"18990235",
             location:"",
+            status:"",
             styleButton:styleButtonAvailable,
             nameButton:nameButtonAvailable,
             imageProfile:imageProfileDefault,
@@ -101,12 +103,12 @@ class ProfileDriver extends React.Component {
             .then(function (response) {
                 let data = response.data;
 
-                if(data.status == statusDesabled){
-                    currentComponent.setState({styleButton:styleButtonAvailable});
-                    currentComponent.setState({nameButton:data.nameButtonAvailable});
+                if(data.location == undefined || data.location == null){
+                    currentComponent.setState({location:""});
                 }else{
-                    currentComponent.setState({styleButton:styleButtonDisable});
-                    currentComponent.setState({nameButton:nameButtonDisable});
+                    //'http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324'
+                    let url = urlLocation + data.location.latitude+","+data.location.longitude;
+                    currentComponent.setState({location:url});
                 }
 
                 let score = data.totalScore;
@@ -115,9 +117,11 @@ class ProfileDriver extends React.Component {
                 score = Number((score).toFixed(1));
                 currentComponent.setState({valueRating:score});
 
+                currentComponent.setState({status:data.status});
                 currentComponent.setState({name:data.party.name});
                 currentComponent.setState({phone:data.party.phone});
                 currentComponent.setState({dni:data.party.dni});
+                currentComponent.UpdateButtonDisableEnable(data);
 
             })
             .catch(function (error) {
@@ -126,9 +130,54 @@ class ProfileDriver extends React.Component {
             });
     }
 
+    UpdateButtonDisableEnable(data){
+        if(data.status != statusDesabled){
+            this.setState({styleButton:styleButtonDisable});
+            this.setState({nameButton:nameButtonDisable});
+        }else{
+            this.setState({styleButton:styleButtonAvailable});
+            this.setState({nameButton:nameButtonAvailable});
+        }
+    }
+
 
     handleButtonDisable(){
-        alert("hay q deshabilitar");
+        this.updateStatus();
+    }
+
+    updateStatus() {
+
+        var path =ApiLinks.Drivers+"/"+this.props.driverId
+        let newStatus;
+
+        if(this.state.status != statusDesabled){
+            newStatus = statusDesabled;
+        }else{
+            newStatus = statusEnable;
+        }
+
+        let data={status:newStatus};
+
+        this.setState({responseError: false});
+
+        var config = {
+            headers: { 'Authorization':Auth.getToken() }
+        };
+
+        let currentComponent = this;
+
+        Axios
+            .put(path,data, config)
+            .then(function (response) {
+                currentComponent.setState({ status: newStatus });
+                currentComponent.UpdateButtonDisableEnable({status:newStatus});
+
+            })
+            .catch(function (error) {
+                console.log(error);
+                currentComponent.setState({responseError: true});
+                alert("error"+error);                
+            });
     }
 
 
@@ -143,8 +192,9 @@ class ProfileDriver extends React.Component {
                     <div class="informationDriver">
                         <h3>{this.state.name}</h3>
                         <br/>
-                        <h5>telf: {this.state.phone}</h5>
-                        <h5>dni: {this.state.dni}</h5>
+                        <h5>Telf: {this.state.phone}</h5>
+                        <h5>Dni: {this.state.dni}</h5>
+                        <h5>Estado: {this.state.status}</h5>
                         <br/>
                         <Button bsStyle={this.state.styleButton} onClick={this.handleButtonDisable.bind(this)} block>
                             {this.state.nameButton}
@@ -170,7 +220,7 @@ class ProfileDriver extends React.Component {
                         <Button bsSize="xsmall" href="javascript:history.go(-1)" className="buttonBack" bsStyle="primary" >volver</Button>
                         <br/><br/><br/><br/>
                         <Button bsSize="small" bsStyle="success" block >
-                            <a href='http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324' target="_blank"
+                            <a href={this.state.location} target="_blank"
                                 className="linkPhotos">
                                 Ver ubicación
                             </a>
