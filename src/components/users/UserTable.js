@@ -99,6 +99,14 @@ export default class UserTable extends React.Component {
     showDocument(cell, row) {
         return row.party.dni;
     }
+
+    showScore = (cell, row) => {
+        let score = row.totalScore;
+        if(row.scoreQuantity != 0)
+            score /= row.scoreQuantity;
+        return Number((score).toFixed(1));
+    }
+
     render() {
             if (this.state.responseError) {
                 return(
@@ -116,7 +124,7 @@ export default class UserTable extends React.Component {
                         <TableHeaderColumn dataField='name' dataFormat={this.showName}>Nombre</TableHeaderColumn>
                         <TableHeaderColumn dataField='dni' dataFormat={this.showDocument}>Documento</TableHeaderColumn>
                         <TableHeaderColumn dataField='status'>Estado</TableHeaderColumn>
-                        <TableHeaderColumn dataField='totalScore'>Puntaje</TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={this.showScore}>Puntaje</TableHeaderColumn>
                     </BootstrapTable>
                 </div>
                 );

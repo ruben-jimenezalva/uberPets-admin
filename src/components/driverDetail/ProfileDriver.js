@@ -15,6 +15,8 @@ const nameButtonAvailable = "habilitar";
 const nameButtonDisable = "deshabilitar";
 const statusDesabled = "deshabilitado";
 const maxStars = 5;
+//const urlLocation = 'http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324'
+const urlLocation = 'http://www.google.com/maps/search/?api=1&query=';
 
 class ProfileDriver extends React.Component {
 
@@ -25,6 +27,7 @@ class ProfileDriver extends React.Component {
             name:"Agusto Linares",
             phone:"11356-7890",
             dni:"18990235",
+            location:"",
             styleButton:styleButtonAvailable,
             nameButton:nameButtonAvailable,
             imageProfile:imageProfileDefault,
@@ -109,6 +112,7 @@ class ProfileDriver extends React.Component {
                 let score = data.totalScore;
                 if(data.scoreQuantity != 0)
                     score /= data.scoreQuantity;
+                score = Number((score).toFixed(1));
                 currentComponent.setState({valueRating:score});
 
                 currentComponent.setState({name:data.party.name});
@@ -168,7 +172,7 @@ class ProfileDriver extends React.Component {
                         <Button bsSize="small" bsStyle="success" block >
                             <a href='http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324' target="_blank"
                                 className="linkPhotos">
-                                Ver Ubicación
+                                Ver ubicación
                             </a>
                         </Button>    
                         <Button bsSize="small" bsStyle="success" block >

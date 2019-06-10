@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Button } from "react-bootstrap";
 import imageCarDefault from "./auto.jpg";
 import "./DriverPhotos.css";
 
@@ -63,6 +63,9 @@ class DriverPhotos extends React.Component {
     render() {
         return (
             <div className="photosDriver">
+                <Button bsSize="medium" href="javascript:history.go(-1)" className="buttonBack" bsStyle="primary" >volver</Button>
+                <br/>
+                <br/>
                 <Carousel>
                     <Carousel.Item>
                         <img width={600} height={100} alt="900x400" src={this.state.imageCar} />

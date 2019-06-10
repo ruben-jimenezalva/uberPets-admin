@@ -56,7 +56,7 @@ export default class Login extends Component {
         Auth.enableAuthentication();
         this.props.history.push("/home");
         //agregado
-        window.location.reload(false); 
+        window.location.reload(true); 
     };
 
     render() {

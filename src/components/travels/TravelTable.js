@@ -3,6 +3,7 @@ import Axios from "axios";
 import ApiLinks from "../../utils/ApiLinks";
 import Auth from "../../utils/auth";
 import {Alert} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
@@ -103,6 +104,16 @@ export default class TravelTable extends React.Component {
         return  date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
     }
 
+
+    linkedIdDriver = (cell, row) => {
+        //const cellAux = this.showName(cell, row);
+        return (
+            <Link to={{ pathname:'/drivers/'+row.driverId}} >
+            {cell}
+            </Link>
+        )
+    }
+
     render() {
             if (this.state.responseError) {
                 return(
@@ -122,7 +133,7 @@ export default class TravelTable extends React.Component {
                         <TableHeaderColumn dataField='price'>Precio</TableHeaderColumn>
                         <TableHeaderColumn dataField='createdAt' dataFormat={this.showDateFormat}>Fecha</TableHeaderColumn>
                         <TableHeaderColumn dataField='userId'>Id de usuario</TableHeaderColumn>
-                        <TableHeaderColumn dataField='driverId'>Id de chofer</TableHeaderColumn>
+                        <TableHeaderColumn dataField='driverId'dataFormat={this.linkedIdDriver}>Id de chofer</TableHeaderColumn>
                         <TableHeaderColumn dataField='from'dataFormat={this.showNameLocation}>Desde</TableHeaderColumn>
                         <TableHeaderColumn dataField='to' dataFormat={this.showNameLocation}>Hasta</TableHeaderColumn>
                     </BootstrapTable>

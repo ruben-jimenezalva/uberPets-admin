@@ -127,6 +127,14 @@ export default class DriverTable extends React.Component {
         )
     }
 
+    showScore = (cell, row) => {
+        let score = row.totalScore;
+        if(row.scoreQuantity != 0)
+            score /= row.scoreQuantity;
+        return Number((score).toFixed(1));
+    }
+
+
     render() {
             if (this.state.responseError) {
                 return(
@@ -149,7 +157,7 @@ export default class DriverTable extends React.Component {
                         <TableHeaderColumn dataField='color' dataFormat={this.showColor}>Color</TableHeaderColumn>
                         <TableHeaderColumn dataField='status'>Estado</TableHeaderColumn>
                         <TableHeaderColumn dataField='travelAmount'>Cant. de viajes</TableHeaderColumn>
-                        <TableHeaderColumn dataField='totalScore'>Puntaje</TableHeaderColumn>
+                        <TableHeaderColumn dataFormat={this.showScore}>Puntaje</TableHeaderColumn>
                     </BootstrapTable>
                 </div>
                 );
