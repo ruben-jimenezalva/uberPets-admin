@@ -10,10 +10,10 @@
     "reactstrap": "^8.0.0",
     "react-bootstrap": "^0.32.4",
     "react-router-dom": "^5.0.0",
+    "react-router": "^5.0.1",
     "react-bootstrap-table": "^4.3.1",
     "react-calendar": "^2.19.0",
-    "react-star-ratings": "^2.3.0",
-    "base64-img": "^1.0.4"
+    "react-star-ratings": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

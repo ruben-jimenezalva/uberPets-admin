@@ -9,14 +9,15 @@ import Axios from "axios";
 import ApiLinks from "../../utils/ApiLinks";
 import Auth from "../../utils/auth";
 
-
 const styleButtonAvailable = "success";
 const styleButtonDisable = "danger";
 const nameButtonAvailable = "habilitar";
 const nameButtonDisable = "deshabilitar";
+const statusDesabled = "deshabilitado";
 const maxStars = 5;
 
 class ProfileDriver extends React.Component {
+
     constructor(props) {
         super(props);
         this.state={
@@ -24,6 +25,8 @@ class ProfileDriver extends React.Component {
             name:"Agusto Linares",
             phone:"11356-7890",
             dni:"18990235",
+            styleButton:styleButtonAvailable,
+            nameButton:nameButtonAvailable,
             imageProfile:imageProfileDefault,
             imageLicense:imageCarDefault,
             imageInsurance:imageCarDefault,
@@ -95,6 +98,14 @@ class ProfileDriver extends React.Component {
             .then(function (response) {
                 let data = response.data;
 
+                if(data.status == statusDesabled){
+                    currentComponent.setState({styleButton:styleButtonAvailable});
+                    currentComponent.setState({nameButton:data.nameButtonAvailable});
+                }else{
+                    currentComponent.setState({styleButton:styleButtonDisable});
+                    currentComponent.setState({nameButton:nameButtonDisable});
+                }
+
                 let score = data.totalScore;
                 if(data.scoreQuantity != 0)
                     score /= data.scoreQuantity;
@@ -112,9 +123,10 @@ class ProfileDriver extends React.Component {
     }
 
 
-    goBack= () => {
-        //this.props.history.push("/travels");
+    handleButtonDisable(){
+        alert("hay q deshabilitar");
     }
+
 
     render() {
         return (
@@ -130,7 +142,9 @@ class ProfileDriver extends React.Component {
                         <h5>telf: {this.state.phone}</h5>
                         <h5>dni: {this.state.dni}</h5>
                         <br/>
-                        <Button bsStyle={styleButtonAvailable} block>{nameButtonAvailable}</Button>
+                        <Button bsStyle={this.state.styleButton} onClick={this.handleButtonDisable.bind(this)} block>
+                            {this.state.nameButton}
+                        </Button>
                     </div>         
                 </div>
 
@@ -149,7 +163,7 @@ class ProfileDriver extends React.Component {
 
                 <div class="columnDetailDriver">            
                     <div className="buttons">
-                        <Button bsSize="xsmall" onClick={this.goBack.bind(this)} className="buttonBack" bsStyle="primary" >volver</Button>
+                        <Button bsSize="xsmall" href="javascript:history.go(-1)" className="buttonBack" bsStyle="primary" >volver</Button>
                         <br/><br/><br/><br/>
                         <Button  bsSize="small" bsStyle="success" block>Ver ubicación</Button>   
                         <br/>
