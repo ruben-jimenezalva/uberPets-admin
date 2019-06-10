@@ -121,7 +121,7 @@ export default class DriverTable extends React.Component {
     linkedName = (cell, row) => {
         const cellAux = this.showName(cell, row);
         return (
-            <Link to='/drivers/${row.id}' >
+            <Link to={{ pathname:'/drivers/'+row.id}} >
             {cellAux}
             </Link>
         )
