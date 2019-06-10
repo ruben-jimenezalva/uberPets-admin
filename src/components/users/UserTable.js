@@ -55,9 +55,6 @@ export default class UserTable extends React.Component {
                 else if (maxScore!= "")
                     path = path + maxScore;
             }
-
-            alert(path);
-
         }
 
         this.setState({responseError: false});
@@ -69,7 +66,7 @@ export default class UserTable extends React.Component {
         let currentComponent = this;
 
         Axios
-            .get(ApiLinks.Users, config)
+            .get(path, config)
             .then(function (response) {
                 currentComponent.setState({users: response.data});
                 console.log(response.data);
