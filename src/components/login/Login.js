@@ -48,7 +48,7 @@ export default class Login extends Component {
             this.redirectUser();
         }
         else{
-            alert("Usuario o contraseña incorrecta");
+            alert("El usuario o la contraseña son incorrectos, vuelva a intentarlo");
         }
     }
 
