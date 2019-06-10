@@ -1,9 +1,10 @@
 import React from "react";
 import { Button, Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import StarRatings from 'react-star-ratings';
 import "./ProfileDriver.css";
-import image from "./koala.png";
-import imageCar from "./auto.jpg";
+import imageProfileDefault from "./koala.png";
+import imageCarDefault from "./auto.jpg";
 import Axios from "axios";
 import ApiLinks from "../../utils/ApiLinks";
 import Auth from "../../utils/auth";
@@ -23,12 +24,16 @@ class ProfileDriver extends React.Component {
             name:"Agusto Linares",
             phone:"11356-7890",
             dni:"18990235",
-            dataImages:"",
+            imageProfile:imageProfileDefault,
+            imageLicense:imageCarDefault,
+            imageInsurance:imageCarDefault,
+            imageCar:imageCarDefault,
         }
     }
 
     componentWillMount(){
         this.getInfoDriver();
+        this.getAllImages();
     }
 
 
@@ -47,8 +52,25 @@ class ProfileDriver extends React.Component {
         Axios
             .get(path, config)
             .then(function (response) {
-                //currentComponent.setState({dataImages: response.data});
-                console.log(response.data);
+                response.data.forEach(element => {
+                    switch (element.name) {
+                        case "license":
+                            currentComponent.setState({imageLicense:"data:image/png;base64, "+element.data});
+                            break;
+
+                        case "profile":
+                            currentComponent.setState({imageProfile:"data:image/png;base64, "+element.data});
+                            break;
+
+                        case "insurance":
+                            currentComponent.setState({imageInsurance:"data:image/png;base64, "+element.data});
+                            break;
+
+                        case "car":
+                            currentComponent.setState({imageCar:"data:image/png;base64, "+element.data});
+                            break;
+                    }
+                });
             })
             .catch(function (error) {
                 console.log(error);
@@ -94,13 +116,11 @@ class ProfileDriver extends React.Component {
         //this.props.history.push("/travels");
     }
 
-
-
     render() {
         return (
             <div class="row" className="rowDetailDriver">
                 <div class="columnDetailDriver">            
-                    <Image className="imageProfile"src={image} circle/>
+                    <Image className="imageProfile"src={this.state.imageProfile} circle/>
                 </div>
                 <div class="columnDetailDriver">
 
@@ -124,7 +144,7 @@ class ProfileDriver extends React.Component {
                 </div>
 
                 <div class="columnDetailDriver">            
-                    <Image className="imageCar" src={imageCar} rounded alt="171x180"/>  
+                    <Image className="imageCar" src={this.state.imageCar} rounded alt="171x180"/>  
                 </div>
 
                 <div class="columnDetailDriver">            
@@ -133,7 +153,12 @@ class ProfileDriver extends React.Component {
                         <br/><br/><br/><br/>
                         <Button  bsSize="small" bsStyle="success" block>Ver ubicación</Button>   
                         <br/>
-                        <Button bsSize="small" bsStyle="success" block>Ver Fotos</Button>    
+                        <Button bsSize="small" bsStyle="success" block >
+                            <Link to={{ pathname:'/drivers/photos/'+this.props.driverId}} 
+                                className="linkPhotos">
+                                Ver Fotos
+                            </Link>
+                        </Button>    
                     </div>                    
                 </div>
             </div>

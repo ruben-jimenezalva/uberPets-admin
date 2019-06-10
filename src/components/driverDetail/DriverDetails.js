@@ -2,6 +2,10 @@ import React from "react";
 import ProfileDriver from "./ProfileDriver";
 import TabDriver from "./TabDriver";
 
+import Axios from "axios";
+import ApiLinks from "../../utils/ApiLinks";
+import Auth from "../../utils/auth";
+
 class DriverDetails extends React.Component {
     constructor(props, context) {
         super(props, context);

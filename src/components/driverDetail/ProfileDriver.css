@@ -37,3 +37,7 @@
 .buttonBack{
     float: right;
 }
+
+.linkPhotos{ 
+    color: inherit; 
+}
