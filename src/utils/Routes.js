@@ -8,6 +8,8 @@ import User from '../components/users/UserApp';
 import Driver from '../components/drivers/DriverApp';
 import DriverDetails from '../components/driverDetail/DriverDetails';
 import DriverPhotos from '../components/driverDetail/DriverPhotos';
+import UserDetails from '../components/userDetail/UserDetails';
+
 
 export default ()=>
   <Switch>
@@ -18,6 +20,7 @@ export default ()=>
     <PrivateRoute path="/drivers" exact component={Driver} />
     <PrivateRoute path='/drivers/:id' exact component={DriverDetails} />
     <PrivateRoute path='/drivers/photos/:id' exact component={DriverPhotos} />
+    <PrivateRoute path='/users/:id' exact component={UserDetails} />
   </Switch>;
 
 

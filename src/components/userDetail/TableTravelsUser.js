@@ -3,7 +3,6 @@ import Axios from "axios";
 import ApiLinks from "../../utils/ApiLinks";
 import Auth from "../../utils/auth";
 import {Alert} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import '../../../node_modules/react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
@@ -11,7 +10,7 @@ var ReactBsTable  = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
-export default class TravelTable extends React.Component {
+export default class UserTravelsTable extends React.Component {
 
     constructor(props) {
         super(props)
@@ -21,49 +20,10 @@ export default class TravelTable extends React.Component {
         };
     }
 
-    componentWillReceiveProps(nextProps){
-        this.componentWillMount(nextProps.dataFilters);    
-    }
+    componentWillMount() {
 
-    componentWillMount(data) {
-
-        var path =ApiLinks.Travels;
-        if (data != undefined ||  data != null){
-            let startDate = data.dateFrom ==""? "":"startDate="+data.dateFrom;
-            let endDate = data.dateTo ==""? "":"endDate="+data.dateTo;
-            let status = data.status ==""? "":"status="+data.status;
-            let driverId = data.driverId ==""? "":"driverId="+data.driverId;
-            let userId = data.userId ==""? "":"userId="+data.userId;
-
-            if(startDate != "" || endDate != "" || status != "" || driverId != "" || userId != "" ){
-                path = path+"/?";
-                let originalPath = path;
-
-                if(startDate != "" )
-                    path = path + startDate;
-
-                if(endDate != "" && originalPath != path)
-                    path = path+"&"+endDate;
-                else if (endDate!= "")
-                    path = path + endDate;
-    
-                if(status != "" && originalPath != path)
-                    path = path+"&"+status;
-                else if (status!= "")
-                    path = path + status;
-    
-                if(driverId != "" && originalPath != path)
-                    path = path+"&"+driverId;
-                else if (driverId!= "")
-                    path = path + driverId;
-    
-                if(userId != "" && originalPath != path)
-                    path = path+"&"+userId;
-                else if (userId!= "")
-                    path = path + userId;
-            }
-
-        }
+        let userId = "userId="+this.props.userId;
+        var path =ApiLinks.Travels+"/?"+userId;
 
         this.setState({responseError: false});
         var config = {
@@ -99,30 +59,6 @@ export default class TravelTable extends React.Component {
         return cell.name;
     }
 
-    showDateFormat(cell, row) {
-        let date = new Date(cell);
-        return  date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
-    }
-
-
-    linkedIdDriver = (cell, row) => {
-        //const cellAux = this.showName(cell, row);
-        return (
-            <Link to={{ pathname:'/drivers/'+row.driverId}} >
-            {cell}
-            </Link>
-        )
-    }
-
-    linkedIdUser = (cell, row) => {
-        //const cellAux = this.showName(cell, row);
-        return (
-            <Link to={{ pathname:'/users/'+row.userId}} >
-            {cell}
-            </Link>
-        )
-    }
-
     render() {
             if (this.state.responseError) {
                 return(
@@ -140,9 +76,8 @@ export default class TravelTable extends React.Component {
                         <TableHeaderColumn isKey hiddenOnInsert={true} dataField='id'>Id de viaje</TableHeaderColumn>
                         <TableHeaderColumn dataField='status'>Estado</TableHeaderColumn>
                         <TableHeaderColumn dataField='price'>Precio</TableHeaderColumn>
-                        <TableHeaderColumn dataField='createdAt' dataFormat={this.showDateFormat}>Fecha</TableHeaderColumn>
-                        <TableHeaderColumn dataField='userId'dataFormat={this.linkedIdUser}>Id de usuario</TableHeaderColumn>
-                        <TableHeaderColumn dataField='driverId'dataFormat={this.linkedIdDriver}>Id de chofer</TableHeaderColumn>
+                        <TableHeaderColumn dataField='createdAt'>Fecha</TableHeaderColumn>
+                        <TableHeaderColumn dataField='userId'>Id de usuario</TableHeaderColumn>
                         <TableHeaderColumn dataField='from'dataFormat={this.showNameLocation}>Desde</TableHeaderColumn>
                         <TableHeaderColumn dataField='to' dataFormat={this.showNameLocation}>Hasta</TableHeaderColumn>
                     </BootstrapTable>

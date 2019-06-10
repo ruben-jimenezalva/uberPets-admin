@@ -1,0 +1,43 @@
+.rowDetailUser {
+    background-color: rgb(233, 240, 241);
+    height: 235px;
+    display: flex;
+    justify-content: center;
+}
+  
+.columnDetailUser {
+    float:left;
+    width: 18%;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: center;
+}
+
+.imageProfile{
+    margin: 2%;
+    width: 95%;
+    height: 95%;
+}
+
+.imageCar{
+    margin: 5%;
+    width: 80%;
+    height: 50%;
+}
+
+.rating{
+    float:left;
+    padding-left: 10px;
+}
+
+.buttons{
+    margin: 5%;
+}
+
+.buttonBack{
+    float: right;
+}
+
+.linkPhotos{ 
+    color: inherit; 
+}
