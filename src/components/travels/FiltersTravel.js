@@ -4,10 +4,11 @@ import { Button, Form, FormGroup, ControlLabel, FormControl, InputGroup } from "
 import Calendar from 'react-calendar';
 
 import "./FiltersTravel.css"
-
+const statusQuoted = "cotizado";
 const statusOnTravel = "en viaje";
 const statusFinish = "finalizado";
-const statusCanceled = "cancelado";
+const statusCanceledByDriver = "cancelado por chofer";
+const statusCanceledByUser = "cancelado por usuario";
 
 export default class FiltersTRavel extends React.Component {
     constructor(props) {
@@ -153,9 +154,11 @@ export default class FiltersTRavel extends React.Component {
                         <ControlLabel id={this.state.value}>Estado</ControlLabel>{' '}
                         <FormControl componentClass="select">
                             <option value="">{"seleccione"}</option>
+                            <option value={statusCanceledByDriver}>{statusCanceledByDriver}</option>
+                            <option value={statusCanceledByUser}>{statusCanceledByUser}</option>
+                            <option value={statusQuoted}>{statusQuoted}</option>
                             <option value={statusOnTravel}>{statusOnTravel}</option>
                             <option value={statusFinish}>{statusFinish}</option>
-                            <option value={statusCanceled}>{statusCanceled}</option>
                         </FormControl>
                     </FormGroup>
                 </div>
