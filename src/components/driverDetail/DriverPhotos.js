@@ -70,22 +70,19 @@ class DriverPhotos extends React.Component {
                     <Carousel.Item>
                         <img width={600} height={100} alt="900x400" src={this.state.imageCar} />
                         <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h3>Imagen del Auto</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
                         <img width={600} height={400} alt="900x400" src={this.state.imageInsurance} />
                         <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <h3>Imagen del Seguro</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                     <Carousel.Item>
                         <img width={600} height={400} alt="900x400" src={this.state.imageLicense} />
                         <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        <h3>Imagen de la Licencia</h3>
                         </Carousel.Caption>
                     </Carousel.Item>
                 </Carousel>
