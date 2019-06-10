@@ -13,7 +13,8 @@ var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 export default class RatingDriverRecievedTable extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { travels: "",
+        this.state3 = { 
+            driverScores: "",
             responseError: false,
             responseSuccessfully: false,
         };
@@ -45,13 +46,13 @@ export default class RatingDriverRecievedTable extends React.Component {
     indexNumber(cell, row, enumObject, rowIndex) { return (<div>{rowIndex + 1}</div>) }
 
     render() {
-        if (this.state.responseError) {
+        if (this.state3.responseError) {
             return(
                 <Alert className="text-center" id="QuerySuccesfully" bsStyle="danger">
                     Your session has <strong>expired</strong> or the system is <strong>not available</strong> 
                 </Alert>)
-        }else if(this.state.driverScores){
-            var arrayDriverScores = this.state.driverScores;
+        }else if(this.state3.driverScores){
+            var arrayDriverScores = this.state3.driverScores;
 
             return (
                 <div>
