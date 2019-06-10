@@ -6,4 +6,5 @@ module.exports = {
      Users : url+'/api/users',
      Drivers : url+'/api/drivers',
      Travels : url+'/api/travels',
+     Documents: url+'/api/fileDocuments',
 };

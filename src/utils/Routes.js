@@ -6,7 +6,7 @@ import Login from '../components/login/Login';
 import Travel from '../components/travels/TravelApp';
 import User from '../components/users/UserApp';
 import Driver from '../components/drivers/DriverApp';
-import DriverDetails from '../components/drivers/DriverDetails';
+import DriverDetails from '../components/driverDetail/DriverDetails';
 
 export default ()=>
   <Switch>
