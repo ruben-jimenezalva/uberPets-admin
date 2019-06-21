@@ -30,6 +30,7 @@ class ProfileDriver extends React.Component {
             dni:"18990235",
             location:"",
             status:"",
+            driverId:"",
             styleButton:styleButtonAvailable,
             nameButton:nameButtonAvailable,
             imageProfile:imageProfileDefault,
@@ -88,7 +89,53 @@ class ProfileDriver extends React.Component {
 
     getInfoDriver(){
 
-        var path =ApiLinks.Drivers+"/?driverId="+this.props.driverId
+        var path =ApiLinks.Drivers+"/?driverId="+this.props.driverId;
+
+        this.setState({responseError: false});
+        this.setState({driverId: this.props.driverId});
+
+        var config = {
+            headers: { 'Authorization':Auth.getToken() }
+        };
+
+        let currentComponent = this;
+
+        Axios
+            .get(path, config)
+            .then(function (response) {
+                let data = response.data;
+
+                /*if(data.location == undefined || data.location == null){
+                    currentComponent.setState({location:""});
+                }else{
+                    //'http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324'
+                    let url = urlLocation + data.location.latitude+","+data.location.longitude;
+                    currentComponent.setState({location:url});
+                }*/
+
+                let score = data.totalScore;
+                if(data.scoreQuantity != 0)
+                    score /= data.scoreQuantity;
+                score = Number((score).toFixed(1));
+                currentComponent.setState({valueRating:score});
+
+                currentComponent.setState({status:data.status});
+                currentComponent.setState({name:data.party.name});
+                currentComponent.setState({phone:data.party.phone});
+                currentComponent.setState({dni:data.party.dni});
+                currentComponent.UpdateButtonDisableEnable(data);
+
+            })
+            .catch(function (error) {
+                console.log(error);
+                currentComponent.setState({responseError: true});                
+            });
+    }
+
+
+    viewPositionDriver(){
+
+        var path =ApiLinks.Drivers+"/?driverId="+this.state.driverId;
 
         this.setState({responseError: false});
 
@@ -103,12 +150,12 @@ class ProfileDriver extends React.Component {
             .then(function (response) {
                 let data = response.data;
 
+                let url;
                 if(data.location == undefined || data.location == null){
-                    currentComponent.setState({location:""});
+                    url=""
                 }else{
                     //'http://www.google.com/maps/search/?api=1&query=36.26577,-92.54324'
-                    let url = urlLocation + data.location.latitude+","+data.location.longitude;
-                    currentComponent.setState({location:url});
+                    url = urlLocation + data.location.latitude+","+data.location.longitude;
                 }
 
                 let score = data.totalScore;
@@ -122,6 +169,8 @@ class ProfileDriver extends React.Component {
                 currentComponent.setState({phone:data.party.phone});
                 currentComponent.setState({dni:data.party.dni});
                 currentComponent.UpdateButtonDisableEnable(data);
+
+                window.open(url);
 
             })
             .catch(function (error) {
@@ -219,11 +268,11 @@ class ProfileDriver extends React.Component {
                     <div className="buttons">
                         <Button bsSize="xsmall" href="javascript:history.go(-1)" className="buttonBack" bsStyle="primary" >volver</Button>
                         <br/><br/><br/><br/>
-                        <Button bsSize="small" bsStyle="success" block >
-                            <a href={this.state.location} target="_blank"
+                        <Button bsSize="small" bsStyle="success" block onClick={this.viewPositionDriver.bind(this)}>
+                            <div
                                 className="linkPhotos">
                                 Ver ubicación
-                            </a>
+                            </div>
                         </Button>    
                         <Button bsSize="small" bsStyle="success" block >
                             <Link to={{ pathname:'/drivers/photos/'+this.props.driverId}} 
