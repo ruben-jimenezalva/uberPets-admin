@@ -59,6 +59,11 @@ export default class UserTravelsTable extends React.Component {
         return cell.name;
     }
 
+    showDateFormat(cell, row) {
+        let date = new Date(cell);
+        return  date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+    }
+
     render() {
             if (this.state.responseError) {
                 return(
@@ -76,7 +81,7 @@ export default class UserTravelsTable extends React.Component {
                         <TableHeaderColumn isKey hiddenOnInsert={true} dataField='id'>Id de viaje</TableHeaderColumn>
                         <TableHeaderColumn dataField='status'>Estado</TableHeaderColumn>
                         <TableHeaderColumn dataField='price'>Precio</TableHeaderColumn>
-                        <TableHeaderColumn dataField='createdAt'>Fecha</TableHeaderColumn>
+                        <TableHeaderColumn dataField='createdAt' dataFormat={this.showDateFormat}>Fecha</TableHeaderColumn>
                         <TableHeaderColumn dataField='userId'>Id de usuario</TableHeaderColumn>
                         <TableHeaderColumn dataField='from'dataFormat={this.showNameLocation}>Desde</TableHeaderColumn>
                         <TableHeaderColumn dataField='to' dataFormat={this.showNameLocation}>Hasta</TableHeaderColumn>

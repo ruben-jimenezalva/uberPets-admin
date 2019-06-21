@@ -22,6 +22,7 @@ export default class RatingDriverSendedTable extends React.Component {
 
     componentWillMount() {
 
+    
         let toId = "fromId="+this.props.driverId;
         var path =ApiLinks.UserScores+"/?"+toId;
 
@@ -45,6 +46,11 @@ export default class RatingDriverSendedTable extends React.Component {
 
     indexNumber(cell, row, enumObject, rowIndex) { return (<div>{rowIndex + 1}</div>) }
 
+    showDateFormat(cell, row) {
+        let date = new Date(cell);
+        return  date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+    }
+
     render() {
         if (this.state.responseError) {
             return(
@@ -60,8 +66,8 @@ export default class RatingDriverSendedTable extends React.Component {
                     tableStyle={ { border: '#0000FF 2.5px solid' } }>
                     <TableHeaderColumn isKey width={'35px'} dataField="any" dataFormat={this.indexNumber}>#</TableHeaderColumn>
                     <TableHeaderColumn dataField='toId'>Id de usuario</TableHeaderColumn>
-                    <TableHeaderColumn dataField='createdAt'>Fecha</TableHeaderColumn>
-                    <TableHeaderColumn dataField='comment' >Comentario</TableHeaderColumn>
+                    <TableHeaderColumn dataField='createdAt' dataFormat={this.showDateFormat}>Fecha</TableHeaderColumn>
+                    <TableHeaderColumn dataField='comments' >Comentario</TableHeaderColumn>
                     <TableHeaderColumn dataField='value' >Puntaje</TableHeaderColumn>
                 </BootstrapTable>
             </div>
