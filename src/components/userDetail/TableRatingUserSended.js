@@ -47,7 +47,10 @@ export default class RatingUserSendedTable extends React.Component {
 
     showDateFormat(cell, row) {
         let date = new Date(cell);
-        return  date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+        let month = date.getMonth()+1;
+        let hour = date.getHours()+":"+date.getMinutes();
+        let dateShow = date.getDate()+"/"+month+"/"+date.getFullYear();
+        return  dateShow + "  -  "+hour+ " hs";
     }
 
     render() {
